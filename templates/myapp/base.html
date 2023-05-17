@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'myapp/style.css' %}"/>
+    <script type="text/javascript" src="{% static "myapp/index.js" %}"></script>
+    <title> Adventurous  - {% block title %} Welcome! {% endblock %}</title>
+</head>
+<body>
+<div>
+    {% include 'myapp/messages.html' %}
+    {% block body_block %}*** {% endblock %}
+    <ul>
+        <li class="hbar1"><a href="{% url 'myapp1:homepage'%}"> Home </a></li><br>
+        <li class="hbar1"></li></ul>
+</div> <hr />
+<div>
+{#    <ul>#}
+{#        <li class="hbar1"><a href="{% url 'myapp1:login'%}"> Home </a></li><br>#}
+{#         <li class="hbar1"></li>#}
+{#</ul>#}
+    <button><a href="{% url 'myapp1:login'%}"> Logout </a></button>
+</div>
+    <script>
+    setTimeout(function(){
+        var msg = document.getElementById("msg");
+        if (msg) {
+            msg.parentNode.removeChild(msg);
+        }
+    }, 3000);
+</script>
+</body>
+</html>

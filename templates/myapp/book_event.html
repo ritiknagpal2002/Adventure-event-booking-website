@@ -1,0 +1,19 @@
+{% block content %}
+    <h2>Event:{{ event.name }}</h2>
+    <p>Description:{{ event.description }}</p>
+    <p>Price: ${{ event.price }}CAD/pr</p>
+    <p>Organised By:{{ event.client.username }}</p>
+    <p>Location:{{ event.location }}</p>
+    <p>Event Date:{{ event.event_date }}</p>
+    <hr>
+    <h1 class="align-center">Book NOW !!</h1>
+    <form method="POST" action="{% url 'myapp1:bookevent' event.pk %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.number_of_people.id_for_label }}">book For {{ form.number_of_people }} people</label>
+
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Book Now</button>
+    </form>
+{% endblock %}

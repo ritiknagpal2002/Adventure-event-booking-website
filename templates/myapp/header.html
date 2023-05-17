@@ -1,0 +1,36 @@
+{% load static %}
+   <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+
+        <!-- <link rel="stylesheet" href="css/icon-font.css"> -->
+        <link rel="stylesheet" href="{% static 'myapp/css/style.css' %}">
+        <link rel="shortcut icon" type="image/png" href="{% static 'myapp/img/favicon.png' %}">
+<style>
+    ul{
+        list-style-type: none;
+    }
+</style>
+ <div class="navigation">
+            <input type="checkbox" class="navigation__checkbox" id="navi-toggle">
+            <label for="navi-toggle" class="navigation__button">
+                <span class="navigation__icon">&nbsp;</span>
+            </label>
+
+            <div class="navigation__background">&nbsp;</div>
+
+            <nav class="navigation__nav">
+                <ul class="navigation__list">
+                    <label for="navi-toggle">
+                        <li class="navigation__item"><label for="navi-toggle"><a href="{% url "myapp1:login" %}" class="navigation__link">Log-in</a></label></li>
+                        <li class="navigation__item"><a href="{% url 'myapp1:homepage'%}" class="navigation__link">Adventures</a></li>
+                        <li class="navigation__item"><a href="#stories" class="navigation__link">stories</a></li>
+                        <li class="navigation__item"><a href="{% url 'myapp1:user_profile' %}" class="navigation__link">User Profile</a></li>
+                        <li class="navigation__item"><a href="{% url 'myapp1:client_profile' %}" class="navigation__link">Event creator's Profile</a></li>
+{#                        <li class="navigation__item"><a href="{% url 'myapp1:adventuresdetail' type_id %}" class="navigation__link">Book now</a></li>#}
+                    </label>
+                </ul>
+            </nav>
+        </div>
+
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="{% static 'myapp/index.js' %}"></script>

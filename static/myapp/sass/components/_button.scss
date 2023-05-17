@@ -1,0 +1,83 @@
+.btn{
+    
+    &,&:link,&:visited {
+        border-radius: 10rem;
+        padding: 1.5rem 4rem;
+        text-decoration: none;
+        transition: all .2s;
+        position: relative;    
+        font-size: 1.6rem;
+        border: none; //removes default border if exist (like btn's)
+        cursor: pointer;
+        
+    }
+    //on hover
+    &:hover{
+     box-shadow: 0px 1rem 2rem rgba($color-black , .4);
+     transform: translateY(-4px);
+
+
+    //on hover fadeout effect
+        &::after{
+            transform: scaleX(1.4) scaleY(1.6); /*for even scaling*/
+            opacity: 0; /*for fade out effect */
+        }
+    }   
+    //on click and focus
+    &:active,
+    &:focus{
+        outline: none; //removes focus outline
+        transform: translateY(-1px);
+        box-shadow: 0px .5rem 1rem rgba($color-black, .4);
+    }
+    //white button
+    &--white{
+        background-color:$color-white;
+        color: $color-gray;
+        &::after{
+            background-color: $color-white;   
+        }
+    }
+    //transparent green
+    &--green{
+        &:link,&:visited {
+        background-color:transparent;
+        color: $color-primary;
+        border: 1px solid $color-primary;
+        display: inline-block;
+        font-size: 1.8rem;
+        
+        }
+        &:hover{
+            background-color: $color-primary-dark; 
+            color: $color-white;  
+        }
+    }
+
+    &--greenfill{
+        background-color:$color-primary;
+        color: $color-white;
+        text-transform: uppercase;
+        &::after{
+            background-color: $color-primary;   
+        }
+
+    }
+
+    &::after {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        width:  100%;
+        border-radius: 10rem;
+        transition: all .5s;
+        position: absolute; /*position after btn behind original*/
+        top:0;
+        left:0;
+        z-index: -1;
+    }
+
+    &--animated{ 
+        animation: moveInUp 0.5s ease-out 1.75s backwards;
+    }
+}

@@ -1,0 +1,74 @@
+{% extends 'myapp/new_base.html' %}
+{% load static %}
+
+{% block body_block %}
+
+    <header class="header">
+        <div style="margin-bottom: 100px" class="header__text--box">
+
+            <h1 class="header__primary"></h1>
+            <span class="header__primary--sub"><h1>Organiser's Profile</h1></span>
+
+            <div style="text-decoration: none; width: 150%; justify-content: center; text-align: center; margin-top: 50px"
+                 class="col-">
+
+                <i class="feature-box__icon icon icon-basic-diamonds"></i>
+                <h3 class="heading3 u-margin-bottom-small">{{ user.first_name }} {{ user.last_name }}</h3>
+                <h3 class="heading3 u-margin-bottom-small">{{ user.email }} </h3>
+
+            </div>
+
+
+        </div>
+    </header>
+
+
+    {% for adventure in adventures %}
+        <section class="section-tours u-padding-bottom-medium" style="background: none">
+            <div class="row ">
+                <div class="u-center-text u-margin-bottom-small">
+                    <h2 class="heading-secondary" id="tours"> {{ adventure }}</h2>
+                </div>
+            </div>
+            <div class="row">
+
+
+                {% for event in events %}
+                    <div class="col-1-of-3" style="margin-bottom: 5em">
+                        <div class="card">
+                            <div class="card__side card__side--front">
+                                <div class="card__picture card__picture-2">
+                                    &nbsp;
+                                </div>
+                                <div class="card__heading">
+                                    <span class="card__heading-span card__heading-span-2">{{ event.name }}</span>
+
+                                </div>
+                                <div class="card__details">
+                                    <ul>
+                                        <li>Event Name - {{ event.name  }}</li>
+                                        <li>Location - {{ event.location }}</li>
+                                        <li>Date Created - {{ event.event_date }}</li>
+                                        <li>Type - {{ event.advanture.name }}</li>
+                                        <li></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card__side  card__side--back card__side--back-2">
+                                <div class="card__cta">
+                                    <div class="back-price-box">
+                                        <span class="back-price-box-only">Price</span>
+                                        <span class="back-price-box-price">${{ event.price }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </section>
+    {% endfor %}
+
+
+{% endblock %}

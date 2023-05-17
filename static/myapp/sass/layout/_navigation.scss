@@ -1,0 +1,178 @@
+/*INSTRUCTIONS:
+# JS/jQuery:
+## toggle off navigation by adding to this to the scrolling function, after prevent default:
+document.getElementById("navi-toggle").checked=false;
+
+# HTML:
+<div class="navigation">
+    <input type="checkbox" class="navigation__checkbox" id="navi-toggle">
+    <label for="navi-toggle" class="navigation__button">
+        <span class="navigation__icon">&nbsp;</span>
+    </label>
+
+    <div class="navigation__background">&nbsp;</div>
+
+    <nav class="navigation__nav">
+        <ul class="navigation__list">
+            <label for="navi-toggle">
+                <li class="navigation__item"><label for="navi-toggle"><a href="#about" class="navigation__link"><span>01</span>About Natours</a></label></li>
+                <li class="navigation__item"><a href="#features" class="navigation__link" onclick="checkAll()"><span>02</span>Your benefits</a></li>
+                <li class="navigation__item"><a href="#tours" class="navigation__link"><span>03</span>Popular tours</a></li>
+                <li class="navigation__item"><a href="#stories" class="navigation__link"><span>04</span>Stories</a></li>
+                <li class="navigation__item"><a href="#book" class="navigation__link"><span>05</span>Book now</a></li>
+            </label>
+        </ul>
+    </nav>
+</div>
+*/
+
+.navigation{
+    &__checkbox{
+        display: none;
+    }
+    &__button{
+        background-color: $color-white;
+        height: 7rem;
+        width: 7rem;
+        position: fixed;
+        top: 6rem;
+        right: 6rem;
+        border-radius: 50%;
+        z-index:2000;
+        box-shadow: 0 1rem 3rem rgba($color-black, .4);
+        cursor: pointer;
+        text-align: center;
+        
+        @include respond(tab-port){
+            top: 4rem;
+            right: 4rem;
+        }
+    }
+    &__background{
+        height: 6rem;
+        width: 6rem;
+        border-radius: 50%;
+        position: fixed;
+        top: 6.5rem;
+        right: 6.5rem;
+        background-image: radial-gradient($color-primary-light, $color-primary-darker);
+        z-index:1000;
+        transition: all 0.8s ease;
+        text-align: center;
+
+        @include respond(tab-port){
+            top: 4.5rem;
+            right: 4.5rem;
+        }
+    }
+
+    &__nav{
+        backface-visibility: hidden;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: -30rem; //hides links on the left side when not checked
+        z-index:1500;
+        opacity: 0;
+        width: 0;
+        transition: all 0.8s cubic-bezier(0.83, 0, 0.17, 1);
+        
+    }
+    &__list{
+        list-style: none; 
+        text-align: center;
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        z-index:1000;
+    }
+    &__item{
+        margin:1rem;
+    }
+
+    &__link{
+        &:link,&:visited{
+        display: inline-block;
+        font-size: 3rem;
+        font-weight: 300;
+        color: $color-white;
+        padding: 1rem 2rem;
+        text-decoration: none;
+        text-transform: uppercase;
+        background-size: 230%; //affects gradient cut
+        background-image: linear-gradient(120deg, transparent 50%, $color-white 50%);
+        transition: all .4s;
+
+            span{
+                display: inline-block;
+                margin-right: 1rem;
+            }
+        }
+        &:hover{
+        background-position: 100%;
+        color:$color-primary;
+        transform: translateX(1rem);
+        }
+    }
+
+    &__checkbox:checked ~ &__background{
+        transform: scale(80);
+    }
+
+    &__checkbox:checked ~ &__nav{
+        opacity: 1;
+        width: 100%;
+        left:0;
+
+    }
+
+    //nav icon
+    &__icon{
+        position: relative;
+        margin-top: 3.5rem;
+        
+        &,&::before,&::after{
+            width: 3rem;
+            height: 2px;
+            background-color: $color-gray-dark;
+            content:"";
+            display: inline-block;
+            
+        }
+        &::before,&::after{
+            content: "";
+            position: absolute;
+            left:0;
+            transition: all .3s;
+        }
+
+        &::before{
+            top: -.8rem;
+        }
+        &::after{
+            top: .8rem;
+        }
+
+      
+    }
+
+    &__button:hover &__icon::before {
+        top: -1rem;
+    }
+    &__button:hover &__icon::after {
+        top: 1rem;
+    }
+
+    &__checkbox:checked  + &__button &__icon{
+        background-color: transparent;
+    }
+    &__checkbox:checked  + &__button &__icon::after{
+        transform: rotate(135deg);
+        top: 0;
+    }
+    &__checkbox:checked  + &__button &__icon:before{
+        transform: rotate(-135deg);
+        top: 0;
+    }
+}

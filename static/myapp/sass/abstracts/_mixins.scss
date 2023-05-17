@@ -1,0 +1,62 @@
+@mixin clearfix {
+    &::after{
+        content:'';
+        display: table;
+        clear: both;
+    }
+
+}
+
+//usage: @include absCenter
+@mixin absCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+
+
+
+/*/////////////////////////////////////////////////
+Media Query manager
+0-600     px : phones
+600-900   px : tablet portrait
+900-1200  px : tablet landscape
+1200-1800 px : normal styles
+1800+     px : big desktop
+
+1em = 16px
+
+USAGE: @include respond(phone) {property: value;}
+*/
+@mixin respond($brakepoint) {
+    //only screen = does not apply on screen mode
+    @if $brakepoint == big-desktop {
+        @media only screen and (min-width: 112.5em) {@content}; // 1800px / 16 = 112.5em
+    }
+    @if $brakepoint == tab-land {
+        @media only screen and (max-width: 75em) {@content};    // 1200px / 16 = 75em
+    }
+    @if $brakepoint == tab-port {
+        @media only screen and (max-width: 56.25em) {@content}; // 900px / 16 = 56.25em
+    }
+    @if $brakepoint == tab-port-touch {
+        @media only screen and (max-width: 56.25em),
+        only screen and (hover: none) {@content}; // 900px / 16 = 56.25em
+    }
+    @if $brakepoint == phone {
+        @media only screen and (max-width: 37.5em) {@content};  // 600px / 16 = 37.5em
+    }
+}
+
+//for high res screens
+@mixin respond-res() {
+    //comma is like an 'or'
+    @media only screen and (min-resolution: 192dpi) and (min-width: 37.5em), // x2 dpr + large screen
+    only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
+    only screen and (min-width: 125em)// 1x dpr + screen over 2k px
+    {@content};
+    
+    
+}

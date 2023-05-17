@@ -1,0 +1,92 @@
+{% include 'myapp/messages.html' %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'myapp/style.css' %}"/>
+
+{% block body_block %}
+
+    <title>Login</title>
+ <br>
+<br>
+    <div >
+{#        <img src={% static 'myapp/ext.jpg' %} class="img" ></div>#}
+    <div class="cont" >
+        <div style="margin-top: 8em" class="form sign-in">
+
+            <h2>Welcome</h2>
+            <form action="{% url 'myapp1:login' %}" method="post">
+                {% csrf_token %}
+            <label>
+                <span>Username</span>
+                <input type="text" name="username" required/>
+            </label>
+            <label>
+                <span>Password</span>
+                <input type="password" name="password" required/>
+            </label>
+            <p class="forgot-pass"><a href="{% url 'myapp1:forgotpassword'%}">Forgot password? </a></p>
+            <button type="submit" class="submit">Sign In</button>
+            </form>
+        </div>
+        <div class="sub-cont">
+            <div class="img">
+                <div style="margin-top: 200px" class="img__text m--up">
+
+                    <p>Don't have an account?</p>
+                    <h2>Sign up here!</h2>
+                </div>
+                <div style="margin-top: 200px" class="img__text m--in">
+
+                    <p>Already have an account?</p>
+                     <h2>Sign in here!</h2>
+                </div>
+                <div style="margin-bottom: 20px" class="img__btn">
+                    <span class="m--up">Sign Up</span>
+                    <span class="m--in">Sign In</span>
+                </div>
+            </div>
+            <div class="form sign-up" >
+                <h2>Create your Account</h2>
+                <form action="{% url 'myapp1:createClient' %}" method="post">
+                {% csrf_token %}
+                <label>
+                <span>Username</span>
+                {{ form2.username }}
+                </label>
+                <label>
+                <span>Password</span>
+                {{ form2.password }}
+                </label>
+                <label>
+                <span>ConfirmPassword</span>
+                {{ form2.confirmpassword }}
+                </label>
+                 <label>
+                <span>Email</span>
+                {{ form2.email }}
+                </label>
+                <label>
+                <span>FirstName</span>
+                {{ form2.first_name }}
+                </label>
+                <label>
+                <span>LastName</span>
+                {{ form2.last_name }}
+                </label>
+                <label>
+                <span>Are You Event Creator</span>
+                {{ form2.IsAdmin }}
+                </label>
+                <button type="submit" class="submit">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.img__btn').addEventListener('click', function() {
+            document.querySelector('.cont').classList.toggle('s--signup');
+        });
+    </script>
+    </div>
+{% endblock %}
+</body>

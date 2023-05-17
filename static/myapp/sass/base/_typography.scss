@@ -1,0 +1,40 @@
+body{
+    font-family: 'Lato', 'Arial', sans-serif;
+    /* font-size: 1.6rem; */
+    font-weight: 400; 
+    line-height: 1.7;
+    color: $color-gray;
+}
+
+.heading-secondary{
+    font-size: 4rem;
+    text-transform: uppercase;
+    letter-spacing: .2rem;
+    font-weight: 700;
+    background-image: linear-gradient(to right,$color-primary-light,$color-primary-dark); //bg gradient
+    display: inline-block; //makes the bg wrap text only
+    -webkit-background-clip: text; // clip bg to text
+    color: transparent; //makes the text transparent
+    transition: all 0.2s;
+
+    @include respond(phone) {
+        font-size: 2.7rem;
+        font-weight: 700;
+    }
+    &:hover {
+        transform: skewY(4deg) skewX(15deg) scale(1.1);
+        text-shadow: .5rem 1rem 2rem rgba($color-black,0.4);
+    }
+    &:focus{
+        outline: none;
+    }
+}
+
+.heading3{
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
+.paragraph{
+    font-size: 1.7rem;
+}

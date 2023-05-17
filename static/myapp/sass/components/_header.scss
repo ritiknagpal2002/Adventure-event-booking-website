@@ -1,0 +1,95 @@
+.header {
+    height: 83vh;
+    background-image: linear-gradient(to right bottom,
+     rgba($color-primary,0.8),
+     rgba($color-primary-dark,0.8))
+    , url('../img/hero-small.jpg');
+    background-size: cover;
+    background-position: top;
+    
+    position: relative;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+
+    @supports (clip-path: polygon(0 0)) or (-webkit-clip-path:polygon(0 0)){
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh , 0 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 75vh , 0 100%);
+        height: 95vh;
+    }
+
+    @include respond-res{
+        background-image: linear-gradient(to right bottom,
+         rgba($color-primary,0.8),
+          rgba($color-primary-dark,0.8))
+        , url('../img/hero.jpg');
+    }
+
+    @include respond(phone){
+        //less steep edge
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh , 0 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 85vh , 0 100%);
+
+    }
+
+    &__logo--box{
+        position: absolute;
+        top:2rem;
+        left: 2rem;
+
+    }
+    &__logo--box img{
+        height: 4rem;
+        width: auto;
+    }
+
+    &__logo--box img{
+        height: 4rem;
+        width: auto;
+    }
+    &__text--box{
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;
+
+        color:$color-white;
+        text-transform: uppercase;
+    }
+    &__primary--main {
+        font-size: 6.4rem;
+        font-weight: 400;
+        letter-spacing: 3rem;
+        line-height: 1.4;
+        animation-name: moveInLeft;
+        animation-duration: 1s;
+        animation-timing-function: ease-out;
+        animation-delay: 1s;
+        animation-fill-mode: backwards;
+        animation: moveInLeft 1s ease-out  0 1;
+
+        @include respond(phone) {
+            letter-spacing: 1rem;
+            font-size: 5rem;
+        }
+    }
+
+    &__primary--sub{
+        font-size: 2rem;
+        font-weight: 700;
+        word-spacing: .8rem;
+        letter-spacing: 1.4rem;
+        animation-name: moveInRight;
+        animation-duration: 1s;
+        animation-timing-function: ease-out;
+        animation-fill-mode: backwards;
+        animation-delay: 1s;
+        margin-bottom: 2.5rem;
+
+        @include respond(phone) {
+            letter-spacing: .5rem;
+            font-size: 1.8rem;
+        }
+    }
+}

@@ -1,0 +1,60 @@
+{% extends "myapp/new_base.html" %}
+{% include 'myapp/messages.html' %}
+{% block body_block %}
+    <section class="section-book" id="create_event_form">
+        <div class="row">
+            <div class="book">
+                <div class="book__form">
+                    <form action="#" class="form" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <h2 class="heading-secondary u-padding-bottom-medium">
+                            Create Adventure
+                        </h2>
+
+                        <div class="form__group">
+                            {{ form.name.label_tag }}
+                            {{ form.name }}
+                        </div>
+                        <div class="form__group">
+                            {{ form.description.label_tag }}
+                            {{ form.description }}
+                        </div>
+                        <div class="form__group">
+                            {{ form.advanture.label_tag }}
+                            {{ form.advanture }}
+                        </div>
+                        <div class="form__group">
+                            {{ form.client.label_tag }}
+                            {{ form.client }}
+                        </div>
+                        <div class="form__group">
+                            {{ form.img.label_tag }}
+                            {{ form.img }}
+                        </div>
+                        <div class="form__group">
+                            {{ form.location.label_tag }}
+                            {{ form.location }}
+                        </div>
+                        <div class="form__group">
+                            {{ form.price.label_tag }}
+                            {{ form.price }}
+                        </div>
+                        <div class="form__group">
+                            {{ form.event_date.label_tag }}
+                            {{ form.event_date }}
+                        </div>
+                        <div class="form__group">
+                            <button style="margin-top: 3em" class="btn btn--greenfill" type="submit">Create &rarr;</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{#    <h1>Create Adventure</h1>#}
+{#    <form method="post" enctype="multipart/form-data">#}
+{#        {% csrf_token %}#}
+{#        {{ form.as_p }}#}
+{#        <button type="submit">Create</button>#}
+{#    </form>#}
+{% endblock %}

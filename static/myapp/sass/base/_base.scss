@@ -1,0 +1,45 @@
+
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit; 
+    
+}
+
+html {
+    font-size: 62.5%; // 1rem=10px; 10px/16px = 62.5%
+    overflow-x:hidden; //removes margins on the sides (enable also on body)
+    //media queries
+    @include respond(big-desktop) {
+        font-size: 75%; // 1 rem = 12px,, 12px/16px = 75%
+    }
+    
+    @include respond(tab-land) {
+        font-size: 56.25%; // 1 rem = 9px,, 9px/16px=56.25%
+    }
+    @include respond(tab-port) {
+        font-size: 50%; // 1 rem = 8px,, 8px/16px=50%
+    }
+    // @include respond(phone) {
+    //     font-size: 50%;
+    // }
+    
+    
+}
+
+body {
+    overflow-x:hidden; //removes margins on the sides (enable also on html)
+    box-sizing: border-box; 
+    padding: 3rem; /*adds a frame to webpage*/
+
+    @include respond(tab-port) {
+        padding: 0;
+    }
+
+}
+
+
+::selection{
+    background-color: $color-primary;
+    color:$color-white;
+}

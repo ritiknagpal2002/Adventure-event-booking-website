@@ -1,0 +1,164 @@
+//$color-black: #000;
+//$color-gray-dark=#333
+// $shadow-light:  rgba(0, 0, 0, 0.2);
+//$shadow-dark:  rgba(0, 0, 0, 0.7);
+
+/*
+INSTRUCTIONS:
+# opens with #popup id
+# remove from smooth scrolling function to allow popup
+
+HTML:
+<div class="popup" id="popup" >
+    <a class="popup__close-bg" href="#" onclick="history.go(-1)"></a>
+    <div class="popup__content" onclick="return false">
+        <div class="popup__left">
+            <img class="popup__img" src="../img/nat-8.jpg" alt="popup photo">
+            <img class="popup__img" src="../img/nat-9.jpg" alt="popup photo">
+        </div>
+        <div class="popup__right">
+            <a class="popup__close" href="#" onclick="history.go(-1)">&times;</a>
+            <h2 class="heading-secondary u-padding-bottom-small">Start booking now</h2>
+            <h3 class="heading3 u-padding-bottom-small">Important &ndash; Read the following information:</h3>
+            <p class="popup__text u-padding-bottom-medium">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus quasi voluptate totam vel suscipit sapiente ut praesentium, fugiat doloremque cupiditate, voluptatum iste sint corporis sequi ex animi! Qui, illum necessitatibus? Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            </p>
+            <div class="u-center-text">
+                <a href="#book" class="btn btn--greenfill" onclick="history.go(-1)">Book now</a>
+            </div>
+        </div>
+
+    </div>
+    <a class="popup__close" href="#" onclick="history.go(-1)"></a>
+</div>
+*/
+
+
+
+.popup {
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+    transition: all .5s; //for closing animation
+    background: rgba($color-black,0.8);//overly color
+    visibility: hidden;//"
+    opacity: 0;//"
+    
+    //check browser support for backdrop filter (background blur)
+    @supports (-webkit-backdrop-filter: blur(10px)) or (backdrop-filter:blur(10px)){
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        background: rgba($color-black,0.3);
+    }
+    
+
+    &__content{
+        @include absCenter;
+        background: $color-white;
+        width: 75%;
+        border-radius: 5px;
+        box-shadow: $shadow-light;
+        display: block;
+        overflow: hidden;
+        transform:translate(-50%,-50%) scale(.2) ;
+        opacity: 0;
+        transition: all .5s .2s;
+        float: right;
+        @include respond(tab-land){
+            width: 90rem;
+        }
+        @include respond(tab-port){
+            width: 63vw;
+        }
+        @include respond(phone){
+            width: 75vw;
+        }
+    }
+    &__left{
+        width: 33.3333333%;
+        height: 100%;
+        display: table-cell;
+        @include respond(tab-port){
+            display: table-footer-group;
+            height: auto;
+            width: 25vw;
+            &:first-child{
+                display: none;
+            }
+        }       
+    }
+
+    &__right{
+        padding: 2rem 5rem;
+        width: 66.6666667%;
+        // float: left;
+        display: table-cell;
+        vertical-align: middle;
+        position: relative;
+        height: inherit;
+        @include respond(tab-land){
+            padding: 1.2rem 5rem 2rem 5rem;
+        }
+    }
+
+    &__img{
+        display: block;
+        width: 100%;
+        display: table-cell;
+    }
+
+    &__text{
+        font-size: 1.6rem;
+        column-count: 2 ;
+        column-gap: 4rem;
+        column-rule: 1px solid $color-gray-light2;
+        hyphens: auto;
+        @include respond(phone){
+            column-count: 1 ;
+        }
+    }
+
+    &:target{
+        visibility: visible;
+        opacity: 1;
+        
+    }
+
+    &:target &__content{
+        transform:translate(-50%,-50%) scale(1) ;
+        opacity: 1;
+        
+    }
+
+    &__close{
+        transition: all .1s ease;
+        &:visited,&:link{
+            color:$color-gray-dark;
+            font-size: 4rem;
+            text-decoration: none;
+            position: absolute;
+            top: 2rem;
+            right:1rem;
+            line-height: 1px;
+        }
+        &:hover{
+            color: $color-primary-light;
+            text-shadow: 0 2px 1rem $shadow-light;
+            top: 1.8rem;
+            
+         }
+        //click on background to close
+        &-bg{
+            width: 100vw;
+            height: 100vh;
+            cursor: default;
+            @include absCenter;
+        }
+    }
+}
+
+
+

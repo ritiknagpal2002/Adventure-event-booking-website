@@ -1,0 +1,105 @@
+// .btn{
+
+// &,&:link,&:visited {
+//     border-radius: 10rem;
+//     padding: 1.5rem 4rem;
+//     text-decoration: none;
+//     transition: all .2s;
+//     position: relative;    
+//     font-size: 1.6rem;
+// }
+.form {
+    backface-visibility: hidden;
+    &__group:not(:last-child){ //input & label
+        margin-bottom: 2rem;
+    }
+
+    &__input{
+        font-size: 1.5rem;
+        font-family: inherit;
+        padding: 1.5rem 2rem;
+        border-radius: 2px;
+        background-color: rgba($color-white, .5 );
+        border: none;
+        border-bottom: 3px solid transparent; //to remove box movement on focus
+        width: 90%;
+        display: block;
+        transition: .4s;
+        &::-webkit-input-placeholder{
+            color: #999; //dark gray
+        }
+
+        &:focus{
+            outline: none;
+            box-shadow: 0 1rem 2rem rgba($color-black,.1);
+            border-bottom: 3px solid $color-primary;
+
+            &:invalid{
+            border-bottom: 3px solid $color-secondary-dark; //invalid input color 
+            }
+        }
+    }
+
+
+    &__label{
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-left: 2rem;
+        margin-top: .7rem;
+        display: block;
+        transition: all .3s; //lablel animation
+    }
+
+    &__input:placeholder-shown + &__label{ //1st sibling
+         opacity: 0; //animating placeholder
+         visibility: hidden;// we use opacity because visibility cannot be animated
+         transform: translateY(-4rem); //move down
+    }
+
+    &__radio-group{
+        width: 49%;
+        display: inline-block;
+    }
+    &__radio-input{
+        display: none;
+    }
+    &__radio-label{
+        font-size: $default-font-size;
+        cursor: pointer;
+        position: relative;
+        padding-left: 4.5rem;
+    }
+
+    &__radio-button{
+        height: 3rem;
+        width: 3rem;
+        border: 5px solid $color-primary;
+        border-radius: 50%;
+        display: inline-block;
+        position: absolute;
+        left: 0;
+        top:-.4rem;
+
+        &::after{
+            content: '';
+            display: block;
+            border-radius: 50%;
+            height: 1.2rem;
+            width: 1.2rem;
+            position: absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            background-color: $color-primary;
+            opacity: 0; //innercircle hidden until clicked
+            transition: opacity .2s;
+        }
+
+        
+    }
+
+    &__radio-input:checked ~ &__radio-label &__radio-button::after {
+    //label is clicked>checked>sibiling> child >after
+        opacity: 1;
+    }
+}

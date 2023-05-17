@@ -1,0 +1,130 @@
+{% extends 'myapp/new_base.html' %}
+{% load static %}
+{% block body_block %}
+    <title>HomePage</title>
+    <header class="header">
+        {#            <div class="header__logo--box">#}
+        {#                <img src="{% static 'myapp/img/logo-white.png' %}" alt="logo">#}
+        {#            </div>#}
+
+        <div class="header__text--box">
+            <h1 class="header__primary"></h1>
+            <span class="header__primary--main"> The Trek-Tix</span>
+            <span class="header__primary--sub">Embrace The Thrill!
+                    </span>
+            <form action="{% url "myapp1:search" %}" method="GET">
+
+                <input type="text" id="search-button" name="query" value="{{ query }}"
+                       placeholder="Explore Adventures..."
+                       class="btn btn--animated search-btn-expanded">
+                <input type="submit" style="visibility: hidden">
+            </form>
+
+
+        </div>
+    </header>
+    {% if events|length > 0 %}
+        <div id="search_results" class="row" style="min-width: 95vw; padding-left: 5em">
+
+            {% for event in events %}
+                <div class="col-1-of-4" style="margin-bottom: 5em; ">
+                    <div class="card">
+                        <div class="card__side card__side--front">
+                            <div class="card__picture card__picture-2">
+                                &nbsp;
+                            </div>
+                            <div class="card__heading">
+                                <span class="card__heading-span card__heading-span-2">{{ event.name }}</span>
+
+                            </div>
+                            <div class="card__details">
+                                <ul>
+                                    <li>Organiser - {{ event.client }}</li>
+                                    <li>Location - {{ event.location }}</li>
+                                    <li>Date - {{ event.event_date }}</li>
+                                    <li>Type - {{ event.advanture.name }}</li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card__side  card__side--back card__side--back-2">
+                            <div class="card__cta">
+                                <div class="back-price-box">
+                                    <span class="back-price-box-only">only</span>
+                                    <span class="back-price-box-price">${{ event.price }}</span>
+                                </div>
+                                <a href="#popup" class="btn btn--white"
+                                   onclick="showPopup({eventID:'{{ event.id }}', name:'{{ event.name }}', desc: '{{ event.description }}'})">Book
+                                    now!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+        <div class="popup" id="popup">
+            <a class="popup__close-bg" href="#" onclick="history.go(-1)"></a>
+            <div class="popup__content" style="padding: 2em">
+                <div class="popup__left"> {% static '' %}
+                    <img class="popup__img" src="{% static 'myapp/img/nat-8.jpg' %}"
+                         alt="popup photo">
+                    {#                        <img class="popup__img" src="{% static 'myapp/img/nat-9.jpg' %}" alt="popup photo">#}
+                </div>
+                <div class="popup__right">
+                    <a class="popup__close" href="#" onclick="history.go(-1)">&times;</a>
+                    <h2 class="heading-secondary u-padding-bottom-small">Book Your Tickets Now!!!</h2>
+                    <h3 class="heading3 u-padding-bottom-small" id="event_name"></h3>
+                    <p class="popup__text u-padding-bottom-medium" id="event_desc">
+
+                    </p>
+                    <form id="book_form" method="POST" class="form" style="padding-bottom: 1em">
+                        {% csrf_token %}
+                        <div class="form__group">
+                            <input name="number_of_people" style="box-shadow: lightgrey 0em 0em 0.5em 0.1em" min="1"
+                                   type="number"
+                                   class="form__input" placeholder="Number of Tickets" id="number_of_people"
+                                   required>
+                            <label for="name" class="form__label">Number of Tickets</label>
+                        </div>
+                        <div class="u-center-text">
+                            <button type="submit" onsubmit="hidePaymentPopup()" class="btn btn--greenfill">Book Now &rarr;</button>
+                        </div>
+                    </form>
+
+
+                </div>
+
+            </div>
+        </div>
+
+    {% endif %}
+    <section class="section-features" id="features">
+        <div class="row">
+            {% for type in types %}
+
+                <a href="{% url 'myapp1:adventuresdetail' type.pk %}" style="text-decoration: none" class="col-1-of-4">
+                    <div class="feature-box">
+                        {% if type.name == "Wildlife adventures" %}
+                            <i class="feature-box__icon icon icon-basic-world4"></i>
+                        {% endif %}
+                        {% if type.name == "Extreme adventures" %}
+                            <i class="feature-box__icon icon icon-basic-world3"></i>
+                        {% endif %}
+                        {% if type.name == "Outdoor adventures" %}
+                            <i class="feature-box__icon icon icon-basic-world2"></i>
+                        {% endif %}
+                        {% if type.name == "Water Adventure" %}
+                            <i class="feature-box__icon icon icon-basic-world1"></i>
+                        {% endif %}
+                        <h3 class="heading3 u-margin-bottom-small">{{ type.name }}
+                        </h3>
+                        <p class="feature-box__text">{{ type.description | truncatechars:160 }}</p>
+                    </div>
+                </a>
+
+
+
+            {% endfor %} </div>
+    </section>
+{% endblock %}

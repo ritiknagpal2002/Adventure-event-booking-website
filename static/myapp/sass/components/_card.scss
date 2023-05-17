@@ -1,0 +1,218 @@
+// $color-primary-light: #7ed56f;
+// $color-primary-dark: #28b485;
+
+// $color-secondary-light: #ffb900;
+// $color-secondary-dark: #ff7730;
+
+// $color-tertiary-light: #2998ff;
+// $color-tertiary-dark: #5643fa;
+.card {
+    height: 50rem;
+    -moz-perspective: 100rem;      //1000px
+    perspective: 100rem;      //1000px
+    position: relative;
+
+    &__side{
+        color:white;
+        height: 50rem;
+        box-shadow: 0 1.5rem 4rem rgba($color-black, 0.2);
+        transition: all 1s ease;
+        backface-visibility: hidden;
+        //stack the elements
+        position: absolute; top: 0; left: 0;
+        width: 100%;
+        border-radius: 3px;
+        overflow: hidden;//img overflowing corners
+
+        &--front{
+            background-color: $color-white;
+        }
+
+
+        &--back{
+            transform: rotateY(180deg); //backside rotated on start
+            
+            text-align: center;
+            position: relative;
+            .card__cta{
+                position: absolute;
+                top:50%;
+                left:50%;
+                transform: translate(-50%,-50%);
+                text-transform: uppercase;
+                width: 90%;
+            }
+
+            .back-price-box-only {
+                font-size: 1.4rem;
+                display: block;
+            }  
+                       
+            .back-price-box-price{
+                display: block;
+                font-size: 6rem;
+                font-weight: 100;
+                padding: 1rem 0 8rem 0;
+            }
+                   
+            &-1{
+                background: linear-gradient(to right bottom, $color-secondary-light,$color-secondary-dark);
+            }
+
+            &-2{
+                background: linear-gradient(to right bottom, $color-primary-light,$color-primary-dark);
+            }
+
+            &-3{
+                background: linear-gradient(to right bottom, $color-tertiary-light,$color-tertiary-dark) ;
+            }
+        }
+    }
+
+    &:hover &__side--front{
+        transform: rotateY(-180deg);
+    }
+    &:hover &__side--back{
+        transform: rotateY(0deg);
+
+        
+    }
+
+    &__picture{
+        background-size: cover;
+        height: 23rem;
+        background-blend-mode: screen;
+        clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+        @include respond(tab-port) {
+            clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+        }
+
+        &-1{
+            background-image: linear-gradient(to bottom right, $color-secondary-light, $color-secondary-dark), url(../img/nat-5.jpg);
+            
+        }
+
+        &-2{
+            background-image: linear-gradient(to bottom right, $color-primary-light, $color-primary-dark), url(../img/nat-6.jpg);
+            
+        }
+
+        &-3{
+            background-image: linear-gradient(to bottom right, $color-tertiary-light, $color-tertiary-dark), url(../img/nat-7.jpg);
+            
+        }
+    }
+
+    &__heading{
+        text-transform: uppercase;
+        color: $color-white;
+        font-size: 2.8rem;
+        font-weight: 300;
+        position: absolute;
+        right: 2.5rem;
+        top: 16rem;
+        width: 75%;
+        text-align: right;
+    }
+
+    &__heading-span{
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+        padding: 1rem 1.5rem;;
+
+        &-1{
+            background:  linear-gradient(to bottom right, rgba($color-secondary-light,.85), rgba($color-secondary-dark,.85));
+        }
+        &-2{ 
+            background:  linear-gradient(to bottom right, rgba($color-primary-light,.85), rgba($color-primary-dark,.85));
+        }
+        &-3{
+            background:  linear-gradient(to bottom right, rgba($color-tertiary-light,.85), rgba($color-tertiary-dark,.85));
+        }
+    }
+
+    &__details{
+        color: $color-gray;
+        font-size: 1.7rem;
+        padding: 4rem 3rem 0 3rem;
+        ul{
+            
+            
+            text-align: center;
+            width: 80%;
+            margin: 0 auto;
+            // font-size: 1.5rem;
+            li{
+                padding: 0.5rem;
+                display: block;
+
+                &:not(:last-child){
+                    border-bottom: 1px solid $color-gray-light2;
+                }
+            }
+        }
+    }
+
+    @include respond(tab-port-touch){
+        height: auto;
+        border-radius: 3px;
+        background-color: $color-white;
+        box-shadow: 0 1.5rem 4rem rgba($color-black, 0.2);
+        &__side{
+            position: relative; 
+            box-shadow: none;
+            &--back{
+                transform: rotateY(0deg); 
+                height: 30rem;
+                clip-path: polygon(0 15%, 100% 0 , 100% 100% ,0 100% );
+            }
+        }
+
+        &__cta{
+            position: relative;
+            margin: 0 auto;
+                
+
+            .back-price-box-only { //'ONLY'
+                font-size: 2rem;
+            }  
+            .back-price-box-price{
+                display: block;
+                font-weight: 300;
+                padding: 1rem 0 2rem 0;
+            }
+
+                    
+                &-1{
+                    background: linear-gradient(to right bottom, $color-secondary-light,$color-secondary-dark);
+                }
+
+                &-2{
+                    background: linear-gradient(to right bottom, $color-primary-light,$color-primary-dark);
+                }
+
+                &-3{
+                    background: linear-gradient(to right bottom, $color-tertiary-light,$color-tertiary-dark) ;
+                }
+            
+        }
+        
+        &__details{
+            font-size: 1.8rem;
+            padding: 2rem 3rem 0 3rem;
+        }
+        &:hover &__side--front{
+            transform: rotateY(0deg);
+        }
+        
+        &:hover &__side--back{
+            transform: rotateY(0deg);       
+        }   
+        
+        
+        
+
+
+        
+    }
+}
